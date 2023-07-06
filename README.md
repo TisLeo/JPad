@@ -51,7 +51,7 @@ Anyone is welcome to contribute. Please make sure to create your own uniquely na
 Donations are greatly appreciated and are completely optional! They will help me continue to work on projects such as this one :) [Donate here (buy me a coffee)](https://www.buymeacoffee.com/tisleo).
 
 ## Gallery
-![Editor Themes](https://github.com/TisLeo/JPad-Priv/assets/88405502/1864d1fd-b7a1-4ed0-b4bc-d3f480bbf518)
-![App Themes](https://github.com/TisLeo/JPad-Priv/assets/88405502/c9827072-06d6-4ff2-b2f0-c97dc75901e9)
-![Zoom](https://github.com/TisLeo/JPad-Priv/assets/88405502/460ac1ac-acc1-4947-b2bc-ebef5225a4a6)
-![Fonts](https://github.com/TisLeo/JPad-Priv/assets/88405502/83766339-ece5-4824-8882-5557e09f5826)
+![Editor Themes](https://github.com/TisLeo/JPad/assets/88405502/178abe2d-4c61-49d6-8262-0a4491999e93)
+![App Themes](https://github.com/TisLeo/JPad/assets/88405502/459d9419-9a2c-42d2-8641-6b2d301b7c11)
+![Zoom](https://github.com/TisLeo/JPad/assets/88405502/7e63a091-8719-429b-a3cd-eab673ebc5d0)
+![Fonts](https://github.com/TisLeo/JPad/assets/88405502/5a2b4cc8-bf68-4ed5-8122-2ab1d5d7f3c7)
