@@ -1,4 +1,4 @@
-# JPad
+# JPad [Beta]
 JPad is a simple, lightweight and cross-platform text editor similar to Notepad with built-in syntax highlighting for over 50 languages. It can also be used as a simple note-taking app with plaintext.
 
 Note: The previous commit history is in a private repository because I was aiming to make JPad public once a stable beta release was available. This will be the only repo used from now on.
