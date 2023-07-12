@@ -32,7 +32,8 @@ To install JPad, go to the [releases](https://github.com/TisLeo/JPad/releases) p
 - `JPad-v1.0.0-beta_setup.exe`: The Windows exe installer. *This comes with Java 17* - works out of the box.
 - `JPad-v1.0.0-beta_setup.dmg`: The macOS app installer. *This comes with Java 17* - works out of the box.
 
-⚠️ _But, why are the `.exe` and `.app`s not signed?_ For the simple reason that it's too expensive to sign the apps officially. **This _may_ cause your antivirus/OS to flag or quarantine the app**. The `.jar` is self-signed.
+⚠️**DISCLAIMER:** _But, why are the `.exe` and `.app` not signed?_ For the simple reason that it's too expensive to maintain a credible certificate for both platforms right now. **This _may_ cause your antivirus/OS to flag or quarantine the app**. The `.jar` is self-signed.
+ - if you don't trust the installers, you can download Java17 and use the `.jar`, or even clone/fork the repo and build it yourself with Maven and go from there. Thanks for understanding.
 
 ## Tech Stack
 - Language: Java
