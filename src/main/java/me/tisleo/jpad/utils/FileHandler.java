@@ -25,7 +25,7 @@ public final class FileHandler {
     private static final FileFilter defaultFileFilter = new FileFilter() {
         @Override
         public boolean accept(File f) {
-            return f.getName().endsWith(".txt");
+            return f.getName().endsWith(".txt") || f.isDirectory();
         }
 
         @Override
@@ -183,6 +183,7 @@ public final class FileHandler {
     public static File showOpenFileChooser() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(defaultFileFilter);
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
         int option = fileChooser.showOpenDialog(null);
         if (option != JFileChooser.APPROVE_OPTION) return null;
@@ -196,8 +197,8 @@ public final class FileHandler {
      */
     private static File showSaveFileChooser() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         fileChooser.setSelectedFile(new File((LiveAppStore.getCurrentDir() + "/untitled.txt")));
-        fileChooser.setFileFilter(defaultFileFilter);
 
         int option = fileChooser.showSaveDialog(null);
         if (option != JFileChooser.APPROVE_OPTION) return null;
