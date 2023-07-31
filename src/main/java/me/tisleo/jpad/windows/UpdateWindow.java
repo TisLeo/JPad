@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * This class represents the update window that is shown when an update is available (if a user has not disabled auto update checking).
+ * @author TisLeo
+ */
 public class UpdateWindow extends JDialog {
 
     /**

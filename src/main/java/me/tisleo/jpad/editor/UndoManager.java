@@ -11,7 +11,7 @@ import javax.swing.undo.UndoableEdit;
  * This class allows new lines to be undoable in an {@link RTextArea}.
  * See <a href="https://github.com/bobbylight/RSyntaxTextArea/issues/372">here</a> for the GitHub issue and a
  * more in-depth overview. Previously, undoing (Ctrl + Z or Command + Z) a new line would undo all previous text.
- * @author <a href="https://github.com/Sothatsit">Sothatsit</a>
+ * @author TisLeo
  */
 public class UndoManager extends RUndoManager {
 
@@ -25,6 +25,7 @@ public class UndoManager extends RUndoManager {
     /**
      * Allows new lines to be separately undoable.
      * @param e the UndoableEditEvent
+     * @author <a href="https://github.com/Sothatsit">Sothatsit</a>
      */
     @Override
     public void undoableEditHappened(UndoableEditEvent e) {
