@@ -20,15 +20,19 @@ public class JPad {
      * The main method of the application. Initialises a light or dark app theme based on the user's preference and
      * shows the root frame.
      * @param args the command line arguments.
-     * @throws UnsupportedLookAndFeelException if the look and feel is not supported.
-     * @throws IOException if an I/O error occurs.
      */
-    public static void main(String[] args) throws UnsupportedLookAndFeelException, IOException {
+    public static void main(String[] args) {
         PropertiesHandler.initProperties();
-        UI.initTheme();
-        UIManager.put("ScrollPane.border", BorderFactory.createEmptyBorder());
 
-        SwingUtilities.invokeLater(() -> RootFrame.getInstance().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            try {
+                UI.initTheme();
+            } catch (IOException | UnsupportedLookAndFeelException e) {
+                throw new RuntimeException(e);
+            }
+            UIManager.put("ScrollPane.border", BorderFactory.createEmptyBorder());
+            RootFrame.getInstance().setVisible(true);
+        });
 
         new SwingWorker<Void, Void>() {
             @Override

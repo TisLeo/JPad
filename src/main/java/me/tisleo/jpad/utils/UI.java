@@ -15,7 +15,7 @@ import java.io.IOException;
  * This class handles some common UI-related operations.
  * @author <a href="https://github.com/TisLeo">TisLeo</a>
  */
-public abstract class UI {
+public final class UI {
 
     /**
      * Changes the title of the main window on the EDT.

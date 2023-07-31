@@ -10,7 +10,7 @@ import java.util.Map;
  * This class is used to store common live data across the application.
  * @author <a href="https://github.com/TisLeo">TisLeo</a>
  */
-public abstract class LiveAppStore {
+public final class LiveAppStore {
 
     /**
      * The current app version name. If you are contributing to the original project, do not touch this.

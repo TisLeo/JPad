@@ -6,7 +6,7 @@ import javax.swing.*;
  * This class is used to display some pre-made, common dialogs to the user.
  * @author <a href="https://github.com/TisLeo">TisLeo</a>
  */
-public abstract class Dialogs {
+public final class Dialogs {
 
     /**
      * Displays a dialog stating an error occurred while saving the file.

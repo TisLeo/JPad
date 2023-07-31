@@ -17,7 +17,7 @@ import java.util.List;
  * This class handles all file-related operations.
  * @author <a href="https://github.com/TisLeo">TisLeo</a>
  */
-public abstract class FileHandler {
+public final class FileHandler {
 
     /**
      * The default file filter for the file chooser dialogs (.txt files).

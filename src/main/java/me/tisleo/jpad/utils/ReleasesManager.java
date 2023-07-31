@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * This class handles all release-related operations.
  */
-public abstract class ReleasesManager {
+public final class ReleasesManager {
 
     /**
      * Calls the GitHub API to check for updates.
