@@ -13,6 +13,9 @@ import java.util.concurrent.ExecutionException;
  */
 public final class ReleasesManager {
 
+    private ReleasesManager() {
+    }
+
     /**
      * Calls the GitHub API to check for updates.
      * @return whether there is an update available.
@@ -31,7 +34,6 @@ public final class ReleasesManager {
             if (response.body() == null) return false;
 
             String responseBody = response.body().string();
-
             info = new Gson().fromJson(responseBody, ReleaseInfo.class);
         }
 

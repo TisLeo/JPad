@@ -19,6 +19,9 @@ import java.util.List;
  */
 public final class FileHandler {
 
+    private FileHandler() {
+    }
+
     /**
      * The default file filter for the file chooser dialogs (.txt files).
      */

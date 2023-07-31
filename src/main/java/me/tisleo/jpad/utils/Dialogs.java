@@ -8,6 +8,9 @@ import javax.swing.*;
  */
 public final class Dialogs {
 
+    private Dialogs() {
+    }
+
     /**
      * Displays a dialog stating an error occurred while saving the file.
      */

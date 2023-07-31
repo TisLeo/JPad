@@ -12,6 +12,9 @@ import java.util.Map;
  */
 public final class LiveAppStore {
 
+    private LiveAppStore() {
+    }
+
     /**
      * The current app version name. If you are contributing to the original project, do not touch this.
      */

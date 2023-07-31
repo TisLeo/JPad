@@ -17,6 +17,9 @@ import java.io.IOException;
  */
 public final class UI {
 
+    private UI() {
+    }
+
     /**
      * Changes the title of the main window on the EDT.
      * @param fileName The file name to set.

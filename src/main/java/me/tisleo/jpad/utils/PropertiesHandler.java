@@ -18,6 +18,9 @@ import java.util.Properties;
  */
 public final class PropertiesHandler {
 
+    private PropertiesHandler() {
+    }
+
     private static final String propertiesPath = LiveAppStore.APP_DATA_DIR + File.separator + "jpad.properties";
 
     /**
