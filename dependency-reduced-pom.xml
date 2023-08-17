@@ -3,17 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.tisleo.jpad</groupId>
   <artifactId>JPad</artifactId>
-  <version>1.0.0-beta</version>
+  <version>1.1.0-beta</version>
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.3.2</version>
-        <configuration>
-          <source>17</source>
-          <target>17</target>
-        </configuration>
-      </plugin>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
         <version>3.2.4</version>
@@ -33,10 +25,72 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <version>${kotlin.version}</version>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <sourceDirs>
+                <source>src/main/java</source>
+                <source>target/generated-sources/annotations</source>
+                <source>target/generated-sources/test-annotations</source>
+              </sourceDirs>
+            </configuration>
+          </execution>
+          <execution>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+            <configuration>
+              <sourceDirs>
+                <source>src/test/java</source>
+                <source>target/generated-test-sources/test-annotations</source>
+              </sourceDirs>
+            </configuration>
+          </execution>
+        </executions>
+        <configuration>
+          <jvmTarget>${maven.compiler.target}</jvmTarget>
+        </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>2.3.2</version>
+        <executions>
+          <execution>
+            <id>compile</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>testCompile</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>testCompile</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <source>17</source>
+          <target>17</target>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <properties>
     <maven.compiler.target>17</maven.compiler.target>
+    <kotlin.version>1.9.0</kotlin.version>
     <maven.compiler.source>17</maven.compiler.source>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
