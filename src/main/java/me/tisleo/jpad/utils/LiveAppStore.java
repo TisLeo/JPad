@@ -18,14 +18,14 @@ public final class LiveAppStore {
     /**
      * The current app version name. If you are contributing to the original project, do not touch this.
      */
-    public static final String APP_VERSION_NAME = "v1.0.0-beta";
+    public static final String APP_VERSION_NAME = "v1.1.0-beta";
 
     /**
      * The current app version. If you are contributing to the original project, do not touch this.
      * <br>
      * Structure as follows: <code>{major, minor, patch}</code>
      */
-    public static final int[] APP_VERSION = {1, 0, 0};
+    public static final int[] APP_VERSION = {1, 1, 0};
 
     /**
      * A {@link HashMap} of all the available editor themes. Corresponds to the theme name and the relative resource path to the theme file.
