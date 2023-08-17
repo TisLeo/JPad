@@ -1,11 +1,12 @@
 # JPad [Beta]
 JPad is a simple, lightweight and cross-platform text editor similar to Notepad with built-in syntax highlighting for over 50 languages. It can also be used as a simple note-taking app with plaintext.
 
-Note: The previous commit history is in a private repository because I was aiming to make JPad public once a stable beta release was available. This will be the only repo used from now on.
+**Note about releases:** For now, only major versions ( left-most number changed --> `x.x.x` ) will be released with installers.
 
 **Jump to**
 - [Features](https://github.com/TisLeo/JPad/#features)
 - [Planned Features](https://github.com/TisLeo/JPad/#planned-features)
+- [Building](https://github.com/TisLeo/JPad/#building)
 - [Installation](https://github.com/TisLeo/JPad/#installation)
 - [Tech Stack](https://github.com/TisLeo/JPad/#tech-stack)
 - [Issues](https://github.com/TisLeo/JPad/#issues)
@@ -24,6 +25,16 @@ Note: The previous commit history is in a private repository because I was aimin
 - Localisation
 - Custom editor themes
 - Unit tests
+
+## Building
+Prerequisites:
+- Java 17
+- Maven 4.0.0
+
+**Steps**
+1. Clone this repo: `git clone https://github.com/tisleo/Jpad`
+2. cd to the location of the project, e.g. `cd jpad`
+3. Run `mvn clean install`
 
 ## Installation
 To install JPad, go to the [releases](https://github.com/TisLeo/JPad/releases) page.
