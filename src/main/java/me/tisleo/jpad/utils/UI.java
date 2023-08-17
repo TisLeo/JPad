@@ -40,8 +40,9 @@ public final class UI {
      * @throws IOException if an I/O exception occurs.
      * @throws UnsupportedLookAndFeelException - If an UnsupportedLookAndFeelException occurs.
      */
-    public static void initTheme() throws IOException, UnsupportedLookAndFeelException {
+    public static void initTheme() throws IOException, UnsupportedLookAndFeelException, InterruptedException {
         if (LiveAppStore.OS_NAME.contains("mac")) {
+            System.setProperty("apple.laf.useScreenMenuBar", "true");
             if (LiveAppStore.getDefaultAppTheme().equalsIgnoreCase("dark")) {
                 UIManager.setLookAndFeel(new FlatMacDarkLaf());
             } else {
