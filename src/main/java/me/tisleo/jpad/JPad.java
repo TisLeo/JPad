@@ -1,5 +1,6 @@
 package me.tisleo.jpad;
 
+import me.tisleo.jpad.utils.LiveAppStore;
 import me.tisleo.jpad.utils.PropertiesHandler;
 import me.tisleo.jpad.utils.ReleasesManager;
 import me.tisleo.jpad.utils.UI;
@@ -25,13 +26,15 @@ public class JPad {
      */
     public static void main(String[] args) {
         PropertiesHandler.initProperties();
-        Desktop.getDesktop().setPreferencesHandler(e -> {
-            try {
-                new SettingsWindow().setVisible(true);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        });
+        if (LiveAppStore.OS_NAME.contains("mac")) {
+            Desktop.getDesktop().setPreferencesHandler(e -> {
+                try {
+                    new SettingsWindow().setVisible(true);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            });
+        }
 
         SwingUtilities.invokeLater(() -> {
             try {
