@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 /**
@@ -31,7 +32,8 @@ public class FontMenu extends JMenu {
                 JMenuItem item;
                 for (String s : LiveAppStore.SYSTEM_AVAILABLE_FONTS) {
                     item = new JMenuItem(s);
-                    item.setFont(new Font(s, Font.PLAIN, 14));
+                    if (!LiveAppStore.OS_NAME.contains("mac"))
+                        item.setFont(new Font(s, Font.PLAIN, 14));
 
                     item.addActionListener(e -> {
                         new Listener().actionPerformed(e);
