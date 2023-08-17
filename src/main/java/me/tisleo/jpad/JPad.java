@@ -4,9 +4,11 @@ import me.tisleo.jpad.utils.PropertiesHandler;
 import me.tisleo.jpad.utils.ReleasesManager;
 import me.tisleo.jpad.utils.UI;
 import me.tisleo.jpad.windows.RootFrame;
+import me.tisleo.jpad.windows.SettingsWindow;
 import me.tisleo.jpad.windows.UpdateWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
@@ -23,11 +25,18 @@ public class JPad {
      */
     public static void main(String[] args) {
         PropertiesHandler.initProperties();
+        Desktop.getDesktop().setPreferencesHandler(e -> {
+            try {
+                new SettingsWindow().setVisible(true);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
         SwingUtilities.invokeLater(() -> {
             try {
                 UI.initTheme();
-            } catch (IOException | UnsupportedLookAndFeelException e) {
+            } catch (IOException | UnsupportedLookAndFeelException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
             UIManager.put("ScrollPane.border", BorderFactory.createEmptyBorder());
@@ -52,6 +61,7 @@ public class JPad {
                 new UpdateWindow().setVisible(true);
             }
         } catch (IOException | ExecutionException | InterruptedException e) {
+            System.err.println("There was an error checking for updates: " + e);
             e.printStackTrace();
         }
     }

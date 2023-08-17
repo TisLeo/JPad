@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.Objects;
 
@@ -44,7 +46,7 @@ public class RootFrame extends JFrame {
         setLayout(new BorderLayout());
 
         SwingUtilities.invokeLater(() -> {
-            add(createMenuBar(), BorderLayout.NORTH);
+            setJMenuBar(createMenuBar());
             add(syntaxTextArea, BorderLayout.CENTER);
             add(new RTextScrollPane(syntaxTextArea), BorderLayout.CENTER);
             add(createBottomToolbar(), BorderLayout.SOUTH);
@@ -169,24 +171,12 @@ public class RootFrame extends JFrame {
         bar.add(createFileMenu());
         bar.add(createViewMenu());
 
-        JMenu settingsButton = new JMenu("Settings");
-        settingsButton.addMouseListener(new SettingsMenuMouseListener());
-        bar.add(settingsButton);
+        if (!LiveAppStore.OS_NAME.contains("mac")) {
+            JMenu settingsButton = new JMenu("Settings");
+            settingsButton.addMouseListener(new SettingsMenuMouseListener());
+            bar.add(settingsButton);
+        }
 
-        bar.add(Box.createHorizontalGlue());
-
-        JCheckBox wrapping = new JCheckBox("Text Wrapping");
-        wrapping.addItemListener(e -> {
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                SwingUtilities.invokeLater(() -> SyntaxTextArea.getInstance().setLineWrap(true));
-            } else {
-                SwingUtilities.invokeLater(() -> SyntaxTextArea.getInstance().setLineWrap(false));
-            }
-        });
-        wrapping.setFocusable(false);
-
-        bar.add(wrapping);
-        bar.add(Box.createHorizontalStrut(8));
         return bar;
     }
 
@@ -202,18 +192,22 @@ public class RootFrame extends JFrame {
         item = new JMenuItem("New");
         fileMenu.add(item);
         item.addActionListener(new NewFileListener());
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 
         item = new JMenuItem("Open");
         fileMenu.add(item);
         item.addActionListener(new OpenFileListener());
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 
         item = new JMenuItem("Save");
         fileMenu.add(item);
         item.addActionListener(new SaveFileListener());
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
 
         item = new JMenuItem("Save as");
         fileMenu.add(item);
         item.addActionListener(new SaveAsFileListener());
+        item.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx() | KeyEvent.ALT_DOWN_MASK));
 
         return fileMenu;
     }
@@ -231,7 +225,24 @@ public class RootFrame extends JFrame {
         viewMenu.add(new SyntaxLanguageMenu());
         viewMenu.add(new FontMenu());
         viewMenu.add(new FontStyleMenu());
+
+        JCheckBoxMenuItem wrapping = new JCheckBoxMenuItem("Text Wrapping");
+        wrapping.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_T, Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx()));
+        wrapping.addItemListener(this::textWrapping);
+        viewMenu.add(wrapping);
         return viewMenu;
+    }
+
+    /**
+     * Toggles (on or off) text wrapping on the text area.
+     * @param e the event
+     */
+    private void textWrapping(ItemEvent e) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
+            SwingUtilities.invokeLater(() -> SyntaxTextArea.getInstance().setLineWrap(true));
+        } else {
+            SwingUtilities.invokeLater(() -> SyntaxTextArea.getInstance().setLineWrap(false));
+        }
     }
 
     public JLabel getSyntaxStyleLabel() {
