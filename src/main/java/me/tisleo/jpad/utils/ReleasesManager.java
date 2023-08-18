@@ -1,6 +1,7 @@
 package me.tisleo.jpad.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -26,22 +27,24 @@ public final class ReleasesManager {
     public static boolean checkUpdate() throws ExecutionException, InterruptedException, IOException {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
-                .url("https://api.github.com/repos/TisLeo/JPad/releases/latest")
+                .url("https://api.github.com/repos/TisLeo/JPad/releases")
                 .build();
 
         ReleaseInfo info;
         try(Response response = client.newCall(request).execute()) {
             if (response.body() == null) return false;
 
-            String responseBody = response.body().string();
-            info = new Gson().fromJson(responseBody, ReleaseInfo.class);
+            JsonArray array = new Gson().fromJson(response.body().string(), JsonArray.class);
+
+            // get top-most release (latest); API doesn't have a GET of the latest non-prerelease.
+            info = new Gson().fromJson(array.get(0), ReleaseInfo.class);
         }
 
         int[] ghVersions;
-        if (info.getName().length() > 7) {
-            ghVersions = toIntArr(info.getName().substring(1, 6).split("\\."));
+        if (info.getTagName().length() > 7) {
+            ghVersions = toIntArr(info.getTagName().substring(1, 6).split("\\."));
         } else {
-            ghVersions = toIntArr(info.getName().substring(1).split("\\."));
+            ghVersions = toIntArr(info.getTagName().substring(1).split("\\."));
         }
 
         int[] currentVersion = LiveAppStore.APP_VERSION;
@@ -64,13 +67,13 @@ public final class ReleasesManager {
     }
 
     /**
-     * A class to represent the "name" field in the GitHub API response.
+     * A class to represent the "tag_name" field in the GitHub API response.
      */
     static class ReleaseInfo {
-        private String name;
+        private String tag_name;
 
-        public String getName() {
-            return name;
+        public String getTagName() {
+            return tag_name;
         }
     }
 
