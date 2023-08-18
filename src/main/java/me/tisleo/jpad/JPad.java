@@ -26,15 +26,8 @@ public class JPad {
      */
     public static void main(String[] args) {
         PropertiesHandler.initProperties();
-        if (LiveAppStore.OS_NAME.contains("mac")) {
-            Desktop.getDesktop().setPreferencesHandler(e -> {
-                try {
-                    new SettingsWindow().setVisible(true);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
-            });
-        }
+        if (LiveAppStore.OS_NAME.contains("mac"))
+            initHandlers();
 
         SwingUtilities.invokeLater(() -> {
             try {
@@ -53,6 +46,30 @@ public class JPad {
                 return null;
             }
         }.execute();
+    }
+
+    /**
+     * Initialises the handlers for the Settings (Preferences) and About menus. Used for macOS.
+     */
+    private static void initHandlers() {
+        Desktop desktop = Desktop.getDesktop();
+        desktop.setPreferencesHandler(e -> {
+            try {
+                new SettingsWindow().setVisible(true);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        desktop.setAboutHandler(h -> JOptionPane.showMessageDialog(
+                null,
+                "JPad"
+                        + "\nVersion: " + LiveAppStore.APP_VERSION_NAME
+                        + "\nCreated by TisLeo"
+                        + "\n\nBeta version: app may be unpolished and have bugs.",
+                "About JPad",
+                JOptionPane.INFORMATION_MESSAGE
+        ));
     }
 
     /**
