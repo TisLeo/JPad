@@ -146,10 +146,10 @@ public final class LiveAppStore {
      * @see Font
      */
     public static int parseFontStyle(String fontStyle) {
-        return switch (fontStyle) {
-            case "Plain" -> Font.PLAIN;
-            case "Bold" -> Font.BOLD;
-            case "Italic" -> Font.ITALIC;
+        return switch (fontStyle.toLowerCase()) {
+            case "plain" -> Font.PLAIN;
+            case "bold" -> Font.BOLD;
+            case "italic" -> Font.ITALIC;
             default -> throw new IllegalArgumentException("Unexpected value: '" + fontStyle + "'. Expected: 'Plain', 'Bold' or 'Italic'");
         };
     }
