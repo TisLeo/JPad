@@ -28,3 +28,4 @@ out/
 build/
 .idea
 .git
+*.DS_Store
