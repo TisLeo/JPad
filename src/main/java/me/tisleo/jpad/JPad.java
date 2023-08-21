@@ -26,7 +26,7 @@ public class JPad {
      */
     public static void main(String[] args) {
         PropertiesHandler.initProperties();
-        if (LiveAppStore.OS_NAME.contains("mac"))
+        if (LiveAppStore.OS_NAME == LiveAppStore.OS.MAC)
             initHandlers();
 
         SwingUtilities.invokeLater(() -> {
@@ -77,9 +77,9 @@ public class JPad {
      */
     private static void checkForUpdate() {
         try {
-            if (Boolean.parseBoolean(PropertiesHandler.getProperty("default.check_updates")) && ReleasesManager.checkUpdate()) {
+            if (Boolean.parseBoolean(PropertiesHandler.getProperty("default.check_updates")) && ReleasesManager.checkUpdate())
                 new UpdateWindow().setVisible(true);
-            }
+
         } catch (IOException | ExecutionException | InterruptedException e) {
             System.err.println("There was an error checking for updates: " + e);
             e.printStackTrace();

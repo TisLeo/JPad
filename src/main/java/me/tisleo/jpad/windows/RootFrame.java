@@ -171,7 +171,7 @@ public class RootFrame extends JFrame {
         bar.add(createFileMenu());
         bar.add(createViewMenu());
 
-        if (!LiveAppStore.OS_NAME.contains("mac")) {
+        if (LiveAppStore.OS_NAME != LiveAppStore.OS.MAC) {
             JMenu settingsButton = new JMenu("Settings");
             settingsButton.addMouseListener(new SettingsMenuMouseListener());
             bar.add(settingsButton);

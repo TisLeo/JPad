@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+import static me.tisleo.jpad.utils.LiveAppStore.OS_NAME;
+
 /**
  * This class handles some common UI-related operations.
  * @author <a href="https://github.com/TisLeo">TisLeo</a>
@@ -41,18 +43,21 @@ public final class UI {
      * @throws UnsupportedLookAndFeelException - If an UnsupportedLookAndFeelException occurs.
      */
     public static void initTheme() throws IOException, UnsupportedLookAndFeelException, InterruptedException {
-        if (LiveAppStore.OS_NAME.contains("mac")) {
-            System.setProperty("apple.laf.useScreenMenuBar", "true");
-            if (LiveAppStore.getDefaultAppTheme().equalsIgnoreCase("dark")) {
-                UIManager.setLookAndFeel(new FlatMacDarkLaf());
-            } else {
-                UIManager.setLookAndFeel(new FlatMacLightLaf());
+        switch (OS_NAME) {
+            case MAC -> {
+                System.setProperty("apple.laf.useScreenMenuBar", "true");
+                if (LiveAppStore.getDefaultAppTheme().equalsIgnoreCase("dark")) {
+                    UIManager.setLookAndFeel(new FlatMacDarkLaf());
+                } else {
+                    UIManager.setLookAndFeel(new FlatMacLightLaf());
+                }
             }
-        } else {
-            if (LiveAppStore.getDefaultAppTheme().equalsIgnoreCase("dark")) {
-                UIManager.setLookAndFeel(new FlatDarkLaf());
-            } else {
-                UIManager.setLookAndFeel(new FlatLightLaf());
+            case WINDOWS, LINUX -> {
+                if (LiveAppStore.getDefaultAppTheme().equalsIgnoreCase("dark")) {
+                    UIManager.setLookAndFeel(new FlatDarkLaf());
+                } else {
+                    UIManager.setLookAndFeel(new FlatLightLaf());
+                }
             }
         }
     }
@@ -64,10 +69,9 @@ public final class UI {
         if (UIManager.getLookAndFeel() instanceof FlatLightLaf || UIManager.getLookAndFeel() instanceof FlatMacLightLaf) return;
         SwingUtilities.invokeLater(() -> {
             try {
-                if (LiveAppStore.OS_NAME.contains("mac")) {
-                    UIManager.setLookAndFeel(new FlatMacLightLaf());
-                } else {
-                    UIManager.setLookAndFeel(new FlatLightLaf());
+                switch (OS_NAME) {
+                    case MAC -> UIManager.setLookAndFeel(new FlatMacLightLaf());
+                    case WINDOWS, LINUX -> UIManager.setLookAndFeel(new FlatLightLaf());
                 }
                 SwingUtilities.updateComponentTreeUI(RootFrame.getInstance().getRootPane());
             } catch (UnsupportedLookAndFeelException e) {
@@ -83,10 +87,9 @@ public final class UI {
         if (UIManager.getLookAndFeel() instanceof FlatDarkLaf || UIManager.getLookAndFeel() instanceof FlatMacDarkLaf) return;
         SwingUtilities.invokeLater(() -> {
             try {
-                if (LiveAppStore.OS_NAME.contains("mac")) {
-                    UIManager.setLookAndFeel(new FlatMacDarkLaf());
-                } else {
-                    UIManager.setLookAndFeel(new FlatDarkLaf());
+                switch(OS_NAME) {
+                    case MAC -> UIManager.setLookAndFeel(new FlatMacDarkLaf());
+                    case WINDOWS, LINUX -> UIManager.setLookAndFeel(new FlatDarkLaf());
                 }
                 SwingUtilities.updateComponentTreeUI(RootFrame.getInstance().getRootPane());
             } catch (UnsupportedLookAndFeelException e) {

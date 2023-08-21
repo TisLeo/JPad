@@ -32,7 +32,7 @@ public class FontMenu extends JMenu {
                 JMenuItem item;
                 for (String s : LiveAppStore.SYSTEM_AVAILABLE_FONTS) {
                     item = new JMenuItem(s);
-                    if (!LiveAppStore.OS_NAME.contains("mac"))
+                    if (LiveAppStore.OS_NAME != LiveAppStore.OS.MAC)
                         item.setFont(new Font(s, Font.PLAIN, 14));
 
                     item.addActionListener(e -> {

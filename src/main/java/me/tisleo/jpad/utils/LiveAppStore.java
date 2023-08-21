@@ -40,7 +40,7 @@ public final class LiveAppStore {
     /**
      * The name of the operating system.
      */
-    public static final String OS_NAME;
+    public static final OS OS_NAME;
 
     /**
      * The available fonts on the system.
@@ -69,6 +69,15 @@ public final class LiveAppStore {
     private static int currentFontStyle;
     private static int currentFontSize;
 
+    /**
+     * Represents the system's operating system.
+     */
+    public enum OS {
+        WINDOWS,
+        MAC,
+        LINUX,
+    }
+
     static {
         EDITOR_THEMES.put("Light", "/themes/light_theme.xml");
         EDITOR_THEMES.put("Dark", "/themes/dark_theme.xml");
@@ -78,11 +87,12 @@ public final class LiveAppStore {
         EDITOR_THEMES.put("Monokai", "/themes/monokai_theme.xml");
         EDITOR_THEMES.put("VS", "/themes/vs_theme.xml");
 
-        OS_NAME = System.getProperty("os.name").toLowerCase();
-        if (OS_NAME.contains("mac")) {
+        if (System.getProperty("os.name").toLowerCase().contains("mac")) {
             APP_DATA_DIR = System.getProperty("user.home") + "/Library/Preferences/JPad";
+            OS_NAME = OS.MAC;
         } else {
             APP_DATA_DIR = System.getenv("LOCALAPPDATA") + File.separator + "JPad";
+            OS_NAME = OS.WINDOWS;
         }
     }
 
@@ -110,7 +120,7 @@ public final class LiveAppStore {
      * @return the prefix name for control-related shortcuts based on OS
      */
     public static String getOsShortcutPrefix() {
-        if (OS_NAME.contains("mac")) {
+        if (OS_NAME == OS.MAC) {
             return "meta";
         } else {
             return "control";
@@ -121,22 +131,20 @@ public final class LiveAppStore {
      * @return the prefix symbol for control-related shortcuts based on OS
      */
     public static String getOsShortcutPrefixSymbol() {
-        if (OS_NAME.contains("mac")) {
-            return "⌘";
-        } else {
-            return "Ctrl";
-        }
+        return switch (OS_NAME) {
+            case MAC -> "⌘";
+            case WINDOWS, LINUX -> "Ctrl";
+        };
     }
 
     /**
      * @return the mnemonic prefix for alt-related shortcuts based on OS
      */
     public static String getOsMnemonicPrefix() {
-        if (OS_NAME.contains("mac")) {
-            return "⌥";
-        } else {
-            return "Alt";
-        }
+        return switch (OS_NAME) {
+            case MAC -> "⌥";
+            case WINDOWS, LINUX -> "Alt";
+        };
     }
 
     /**
