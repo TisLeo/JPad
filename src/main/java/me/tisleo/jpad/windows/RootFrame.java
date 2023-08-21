@@ -41,7 +41,7 @@ public class RootFrame extends JFrame {
         super("JPad " + LiveAppStore.APP_VERSION_NAME + " • " + "Untitled");
         INSTANCE = this;
 
-        setSize(1280, 720);
+        setSize(640, 720);
         setMinimumSize(getSize());
         setLayout(new BorderLayout());
 
