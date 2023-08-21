@@ -57,7 +57,7 @@ To install JPad, go to the [releases](https://github.com/TisLeo/JPad/releases) p
 If you find any bugs, open an [issue](https://github.com/TisLeo/JPad/issues) and I will get back to you as soon as possible. If your issue is with the actual text editor area, it's likely from the [RSyntaxTextArea issues](https://github.com/bobbylight/RSyntaxTextArea/issues) (so please refrain from opening issues related to it); I will continue to update JPad with every big release of RSyntaxArea to make sure it works as intended.
 
 ## Contribution
-Anyone is welcome to contribute. Please make sure to create your own uniquely named and [up-to-date](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork) branch and keep within the app's coding style (*including [Javadoc](https://www.oracle.com/uk/technical-resources/articles/java/javadoc-tool.html) comments!*). Minor changes, such as slight rewordings or typos should be done via issues instead.
+See [CONTRIBUTING.md](https://github.com/TisLeo/JPad/blob/main/CONTRIBUTING.md) for more info.
 
 ## Donate
 Donations are greatly appreciated and are completely optional! They will help me continue to work on projects such as this one :) [Donate here (buy me a coffee)](https://www.buymeacoffee.com/tisleo).
