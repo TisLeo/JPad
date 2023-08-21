@@ -190,26 +190,60 @@ public class SettingsWindow extends JDialog {
      */
     private JPanel createShortcutPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 3));
+        switch(LiveAppStore.OS_NAME) {
+            case MAC -> panel.setLayout(new GridLayout(2, 3));
+            case WINDOWS, LINUX -> panel.setLayout(new GridLayout(4, 3));
+        }
         panel.setBorder(new CompoundBorder(new EmptyBorder(5, 10, 5, 10), BorderFactory.createTitledBorder("Shortcuts")));
 
-        String prefix = LiveAppStore.getOsShortcutPrefixSymbol();
-        String mnemonic = LiveAppStore.getOsMnemonicPrefix();
+        String controlMask = LiveAppStore.getOsShortcutPrefixSymbol();
+        String altMask = LiveAppStore.getOsMnemonicPrefix();
+        switch(LiveAppStore.OS_NAME) {
+            case MAC -> macShortcuts(panel, controlMask, altMask);
+            case WINDOWS, LINUX -> windowsLinuxShortcuts(panel, controlMask, altMask);
+        }
 
-        panel.add(createShortcutLabel("Save", prefix, "S"));
-        panel.add(createShortcutLabel("File Menu", mnemonic, "F"));
-        panel.add(new JLabel()); // filler
-        panel.add(createShortcutLabel("Open", prefix, "O"));
-        panel.add(createShortcutLabel("View Menu", mnemonic, "V"));
-        panel.add(new JLabel()); // filler
-        panel.add(createShortcutLabel("New", prefix, "N"));
         return panel;
+    }
+
+    /**
+     * Sets appropriate shortcuts for Windows and Linux.
+     * @param panel the JPanel to add the shortcuts to
+     * @param controlMask the control mask symbol for the shortcut key
+     * @param altMask the alt mask for the shortcut key
+     */
+    private void windowsLinuxShortcuts(JPanel panel, String controlMask, String altMask) {
+        JLabel filler = new JLabel();
+        panel.add(createShortcutLabel("Save", controlMask, "S"));
+        panel.add(createShortcutLabel("File Menu", altMask, "F"));
+        panel.add(filler);
+        panel.add(createShortcutLabel("Save as", altMask + "+" + controlMask, "S"));
+        panel.add(createShortcutLabel("View Menu", altMask, "V"));
+        panel.add(filler);
+        panel.add(createShortcutLabel("New", controlMask, "N"));
+        panel.add(filler);
+        panel.add(createShortcutLabel("Open", controlMask, "O"));
+    }
+
+    /**
+     * Sets appropriate shortcuts for macOS.
+     * @param panel the JPanel to add the shortcuts to
+     * @param controlMask the control mask symbol for the shortcut key
+     * @param altMask the alt mask for the shortcut key
+     */
+    private void macShortcuts(JPanel panel, String controlMask, String altMask) {
+        JLabel filler = new JLabel();
+        panel.add(createShortcutLabel("Save", controlMask, "S"));
+        panel.add(createShortcutLabel("Save as", altMask + "+" + controlMask, "S"));
+        panel.add(filler);
+        panel.add(createShortcutLabel("New", controlMask, "N"));
+        panel.add(createShortcutLabel("Open", controlMask, "O"));
     }
 
     /**
      * Creates a JLabel containing the shortcut key for a specific function of the application.
      * @param name the name of the function
-     * @param prefix the prefix symbol for the shortcut key
+     * @param prefix the prefix symbol(s) for the shortcut key
      * @param key the shortcut key
      * @return a JLabel containing the shortcut key for a specific function of the application.
      */
