@@ -133,7 +133,7 @@ public final class LiveAppStore {
      */
     public static String getOsMnemonicPrefix() {
         if (OS_NAME.contains("mac")) {
-            return "Ctrl";
+            return "⌥";
         } else {
             return "Alt";
         }
